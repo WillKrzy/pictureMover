@@ -86,7 +86,7 @@ def handle_folder(folder, destination, filesProcessed, queue) :
             if item.is_file() and item.name.lower().endswith(tuple(allFileTypes)) :
                 filesProcessed = handle_file(item, destination, filesProcessed, queue)
             elif item.is_dir():
-                handle_folder(item, destination, filesProcessed, queue)
+                filesProcessed = handle_folder(item, destination, filesProcessed, queue)
     return filesProcessed
 
 def handle_file(file, destination, filesProcessed, queue):
