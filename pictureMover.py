@@ -74,14 +74,10 @@ def count_all_files_to_copy(source) :
   return totalFiles
 
 def copy_files(source, destination, queue) :
-  filesProcessed = 0
-  with os.scandir(source) as iterator:
-    for item in iterator:
-        if item.is_dir():
-            filesProcessed = handle_folder(item, destination, filesProcessed, queue)
+  handle_folder(source, destination, 0, queue)
 
 def handle_folder(folder, destination, filesProcessed, queue) :
-    with os.scandir(folder.path) as iterator:
+    with os.scandir(folder) as iterator:
         for item in iterator:
             if item.is_file() and item.name.lower().endswith(tuple(allFileTypes)) :
                 filesProcessed = handle_file(item, destination, filesProcessed, queue)
